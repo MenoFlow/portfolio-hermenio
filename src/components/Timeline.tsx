@@ -2,6 +2,7 @@
 import { useLanguage } from "@/lib/LanguageContext";
 import { motion } from "framer-motion";
 
+
 const timelineData = [
   {
     year: "2021",
@@ -30,21 +31,21 @@ const timelineData = [
     title: {
       en: [
         "Bachelor's Degree - Year 1",
-        "Obtained DELF B1"
+        "Obtained DELF B1",
       ],
       fr: [
         "Licence 1",
-        "Obtention du DELF B1"
+        "Obtention du DELF B1",
       ],
     },
     description: {
       en: [
         "First year of higher education in Computer Science.",
-        "Obtained DELF B1 certificate (intermediate level)"
+        "Obtained DELF B1 certificate (intermediate level).",
       ],
       fr: [
         "Première année d'études supérieures en Informatique.",
-        "Obtention du certificat DELF B1"
+        "Obtention du certificat DELF B1.",
       ],
     },
   },
@@ -53,21 +54,29 @@ const timelineData = [
     title: {
       en: [
         "Bachelor's Degree - Year 2",
-        "Obtained DELF B2 certificate (upper intermediate level)"
+        "Obtained DELF B2 Certificate",
+        "Cybersecurity Training Certificate",
+        "Web Developer Intern",
       ],
       fr: [
         "Licence 2",
-        "Obtention du DELF B2"
+        "Obtention du DELF B2",
+        "Certificat de formation en cybersécurité",
+        "Stagiaire développeur web",
       ],
     },
     description: {
       en: [
         "Second year specializing in General Computer Science (Systems & Networks + Web Development).",
-        "Obtained DELF B2 certificate (upper intermediate level)"
+        "Obtained DELF B2 certificate (upper intermediate level).",
+        "Completed cybersecurity training at Orange Digital Center Madagascar.",
+        "Completed a three-month web development internship at the Ministry of Economy and Finance in Fianarantsoa, focusing on web technologies, React, and application development.",
       ],
       fr: [
         "Deuxième année en Informatique Générale (Systèmes & Réseaux + Développement Web).",
-        "Obtention du certificat DELF B2"
+        "Obtention du certificat DELF B2.",
+        "Formation en cybersécurité à l'Orange Digital Center Madagascar.",
+        "Stage de trois mois en développement web au Ministère de l'Économie et des Finances à Fianarantsoa, axé sur les technologies web, React et le développement d'applications.",
       ],
     },
   },
@@ -77,24 +86,28 @@ const timelineData = [
       en: [
         "Bachelor's Degree - Year 3",
         "Obtained DALF C2",
-        // "Obtention du DALF C2"
+        "Freelance Full Stack Developer",
+        "Full Stack Developer Intern",
       ],
       fr: [
         "Licence 3",
         "Obtention du DALF C2",
-        // "Obtention du DALF C2"
+        "Développeur Full Stack freelance",
+        "Stagiaire développeur Full Stack",
       ],
     },
     description: {
       en: [
         "Advanced studies in Full Stack Development and Network Infrastructure.",
-        "Obtained DALF C2 certificate (advanced level)",
-        // "Obtained DALF C2 certificate (mastery level)"
+        "Obtained DALF C2 certificate (advanced level).",
+        "Worked as a freelance developer from January to June, building web applications for individuals in Madagascar and clients on ComeUp.",
+        "Completed a three-month internship at Karibo Services from September to December, developing the intelligent fuel monitoring application for Madarail and working with Docker, GitHub Actions, DNS, and VPS deployment.",
       ],
       fr: [
         "Études avancées en Développement Full Stack et Infrastructure Réseau.",
-        "Obtention du certificat DALF C2",
-        // "Obtention du certificat DALF C2"
+        "Obtention du diplôme approfondi de langue française DALF C2.",
+        "Activité de développeur freelance de janvier à juin : réalisation d'applications web pour des particuliers à Madagascar et des clients sur ComeUp.",
+        "Stage de trois mois chez Karibo Services de septembre à décembre, avec le développement de l'application de suivi intelligent du carburant pour Madarail et l'utilisation de Docker, GitHub Actions, DNS et du déploiement sur VPS.",
       ],
     },
   },
@@ -103,25 +116,30 @@ const timelineData = [
     title: {
       en: [
         "Master 1 - Year 4",
-        "TEFL (Teaching English as a Foreign Language)"
+        "TEFL (Teaching English as a Foreign Language)",
+        "Co-Founder & Project Manager",
       ],
       fr: [
         "Master 1",
-        "TEFL (Teaching English as a Foreign Language)"
+        "TEFL (Teaching English as a Foreign Language)",
+        "Co-fondateur et chargé de projet",
       ],
     },
     description: {
       en: [
         "First year of Master's program focusing on Software Engineering and Advanced Systems Administration.",
-        "Obtained TEFL certificate"
+        "Obtained TEFL certificate.",
+        "Co-founded Karibo Consulting Implementation (KCI), the digital outsourcing division of Karibo Services, in December 2025. Continued working as a Full Stack Developer and Project Manager, contributing to projects for SPAT Toamasina, Paositra Malagasy, and Madarail, with responsibilities in software development, testing, maintenance, automated deployment, requirements engineering, and technical documentation.",
       ],
       fr: [
         "Première année de Master axée sur le Génie Logiciel et l'Administration Systèmes Avancée.",
-        "Obtention du certificat TEFL"
+        "Obtention du certificat TEFL.",
+        "Co-fondateur de Karibo Consulting Implementation (KCI), la branche d'externalisation digitale de Karibo Services, en décembre 2025. Poursuite des activités en tant que développeur Full Stack et chargé de projet, avec des contributions aux projets de SPAT Toamasina, Paositra Malagasy et Madarail, notamment en développement, tests, maintenance, déploiement automatisé, ingénierie des besoins et rédaction technique.",
       ],
     },
   },
 ];
+
 
 
 const Timeline = () => {

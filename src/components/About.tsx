@@ -29,6 +29,7 @@ import {
   HardDrive,
   Activity,
   Zap,
+  Triangle 
 } from "lucide-react";
 
 const About = () => {
@@ -37,12 +38,12 @@ const About = () => {
 
   const glSkills = [
     { name: "React", icon: <Atom className="w-5 h-5 text-blue-200" /> },
-    { name: "Node.js", icon: <Server className="w-5 h-5" /> },
-    { name: "Java", icon: <FileCode className="w-5 h-5 text-blue-500" /> },
+    { name: "Nest", icon: <Server className="w-5 h-5" /> },
+    { name: "Express", icon: <FileCode className="w-5 h-5 text-blue-500" /> },
     { name: "Tailwind", icon: <Braces className="h-5 w-5 text-red-500" /> },
     { name: "TS/JS", icon: <FileCode className="w-5 h-5" /> },
     { name: "Python", icon: <Terminal className="w-5 h-5 text-orange-500" /> },
-    { name: "Laravel", icon: <Settings className="w-5 h-5" /> },
+    { name: "Next", icon: <Triangle className="w-5 h-5" /> },
     { name: "MySQL", icon: <Database className="w-5 h-5" /> },
     { name: "Docker", icon: <Box className="w-5 h-5 text-blue-400" /> },
     { name: "Git", icon: <Workflow className="w-5 h-5 text-green-500" /> },

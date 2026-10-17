@@ -121,7 +121,7 @@ const Hero = () => {
             whileHover={{ scale: 1.06, rotate: 4 }}
           >
             <Avatar className="h-40 w-40 sm:h-48 sm:w-48 border-4 border-highlight/80 shadow-2xl shadow-highlight/20">
-              <AvatarImage src="/Menoh.png" alt="Portrait" />
+              <AvatarImage src="/Menoh.webp" alt="Portrait" />
               <AvatarFallback className="text-5xl font-bold bg-accent text-white">
                 MENOH
               </AvatarFallback>
