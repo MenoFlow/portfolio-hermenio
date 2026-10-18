@@ -1,4 +1,4 @@
-import { Github, ExternalLink } from "lucide-react";
+import { Github, ExternalLink, Mountain } from "lucide-react";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import {
@@ -9,7 +9,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { 
   Atom, 
   Server, 
@@ -82,75 +82,97 @@ const techIcons: {[key: string]: JSX.Element} = {
   "MongoDB": <Database className="w-4 h-4" />,
   "PostgreSQL": <Database className="w-4 h-4" />,
   "MySQL": <Database className="w-4 h-4" />,
+  "pgSQL": <Database className="w-4 h-4" />,
+  "Supabase": <Database className="w-4 h-4" />,
   "Firebase": <Database className="w-4 h-4" />,
   "Tailwind CSS": <FileCode className="w-4 h-4" />,
   "Bootstrap CSS": <FileCode className="w-4 h-4" />,
   "Socket.io": <Server className="w-4 h-4" />,
   "Markdown": <FileCode className="w-4 h-4" />,
+  "Leaflet": <Mountain className="w-4 h-4" />,
 };
 
 
 const projects = [
-    {
-  title: "TrackFuel360",
-  description: {
-    fr: "Une application de suivi intelligent de carburant et de détection d'anomalies \n Email: admin@example.com |\n Password: admins",
-    en: "An intelligent fuel tracking and anomaly detection application \n Email: admin@example.com |\n Password: admins"
+  {
+    title: "TrackFuel360",
+    description: {
+      fr: "Une application de suivi intelligent de carburant et de détection d'anomalies\nEmail : admin@example.com\nPassword : admins",
+      en: "An intelligent fuel tracking and anomaly detection application\nEmail : admin@example.com\nPassword : admins"
+    },
+    tech: ["React", "PWA", "Tailwind CSS", "Node.js", "MySQL", "Leaflet"],
+    github: "#",
+    demo: "https://trackfuel360.com/",
+    image: "/trackfuel.png",
   },
-  tech: ["React", "PWA", "Tailwind CSS", "Node.js", "MySQL", "Leaflet"],
-  github: "#",
-  demo: "https://trackfuel360.com/",
-  image: "/trackfuel.png",
-},
-{
-  title: "VinExpert",
-  description: {
-    fr: "Une application web pour la gestion de la production et la vente de vin \n Email: admin@example.com |\n Password: admins",
-    en: "A web application for wine production management and sales \n Email: admin@example.com |\n Password: admins"
+  {
+    title: "VinExpert",
+    description: {
+      fr: "Une application web pour la gestion de la production et la vente de vin.\nEmail : admin@example.com\nPassword : admins",
+      en: "A web application for wine production management and sales.\nEmail : admin@example.com\nPassword : admins"
+    },
+    tech: ["React", "Tailwind CSS", "Node.js", "MySQL"],
+    github: "#",
+    demo: "https://vinexpert-management.vercel.app/",
+    image: "/vinexpert.png",
   },
-  tech: ["React", "Tailwind CSS", "Node.js", "MySQL", "Chart.js"],
-  github: "#",
-  demo: "https://vinexpert-management.vercel.app/",
-  image: "/vinexpert.png",
-},
-
   {
     title: "Cotizadmin",
     description: {
-      fr: "Une application de gestion de cotisation \n Username: admin |\n Password: admin",
-      en: "An application of cotisation management \n Username: admin |\n Password: admin"
+      fr: "Une application de gestion de cotisation d'une association de football.\nUsername : admin\nPassword : admin",
+      en: "An application of cotisation management of a football association.\nUsername : admin\nPassword : admin"
     },
     tech: ["React", "Tailwind CSS", "Node.js"],
     github: "https://github.com/MenoFlow/cotizadmin",
     demo: "https://cotizadmin-v-2-0.vercel.app/",
     image: "/cotizcap3.png",
   },
-{
-  title: "MenoStore",
-  description: {
-    fr: "Une application web permettant de parcourir et télécharger mes applications mobiles.",
-    en: "A web application to browse and download my mobile apps."
+  {
+    title: "MenoStore",
+    description: {
+      fr: "Une application web permettant de parcourir et télécharger mes applications mobiles.",
+      en: "A web application to browse and download my mobile apps."
+    },
+    tech: ["React", "Tailwind CSS"],
+    github: "https://github.com/MenoFlow/appstoreweb",
+    demo: "https://menostore.vercel.app/",
+    image: "menostore.png",
   },
-  tech: ["React", "Tailwind CSS"],
-  github: "https://github.com/MenoFlow/appstoreweb",
-  demo: "https://menostore.vercel.app/",
-  image: "menostore.png",
-},
-
-
   {
     title: "Porfolio",
     description: {
-      fr: "Site portfolio personnel avec blog intégré",
-      en: "Personnal site for portfolio with integration of blog"
+      fr: "Site portfolio personnel.",
+      en: "Personnal site for portfolio."
     },
     tech: ["React", "Tailwind CSS"],
     github: "#",
     demo: "#",
     image: "/portfocap1.png",
   },
-
+  {
+    title: "Symposium",
+    description: {
+      fr: "Site web du 1er Symposium de la Cybersécurité de Madagascar.",
+      en: "Website of the 1st Madagascar Cybersecurity Symposium."
+    },
+    tech: ["React", "Tailwind CSS", "Supabase"],
+    github: "#",
+    demo: "https://symposium.cirt.gov.mg/",
+    image: "/symposium.png",
+  },
+  {
+    title: "Madavola",
+    description: {
+      fr: "Plateforme de traçabilité de l'or à Madagascar pour les orpailleurs et collecteurs.",
+      en: "Gold traceability platform in Madagascar for artisanal miners and collector."
+    },
+    tech: ["React", "Tailwind CSS", "Express", "pgSQL"],
+    github: "#",
+    demo: "https://madavola.vercel.app/",
+    image: "/madavola.png",
+  },
 ];
+
 
 
 const Projects = () => {
@@ -230,6 +252,7 @@ const Projects = () => {
 
           </div>
         </motion.div>
+        
 
         {activeCategory === 'GL' ? (
         
@@ -282,7 +305,7 @@ const Projects = () => {
                         >
                           <Github className="w-6 h-6" />
                         </motion.a> */}
-                        {/* <motion.a
+                        <motion.a
                           href={project.demo}
                           className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
                           target="_blank"
@@ -294,7 +317,7 @@ const Projects = () => {
                           transition={{ delay: 0.2 }}
                         >
                           <ExternalLink className="w-6 h-6" />
-                        </motion.a> */}
+                        </motion.a>
                       </div>
                     </div>
                     
@@ -315,7 +338,12 @@ const Projects = () => {
                         viewport={{ once: false }}
                         transition={{ duration: 0.3, delay: 0.2 }}
                       >
-                        {project.description[language]}
+                          {project.description.fr.split('\n').map((line, index) => (
+                            <React.Fragment key={index}>
+                              {line}
+                              <br />
+                            </React.Fragment>
+                          ))}
                       </motion.p>
                       <motion.div 
                         className="flex flex-wrap gap-2"
@@ -410,6 +438,7 @@ const Projects = () => {
           </div>
         )}
       </div>
+
     </section>
   );
 };

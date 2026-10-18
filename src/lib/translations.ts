@@ -121,6 +121,11 @@ export const translations: Translation = {
     fr: "Découvrez mes réalisations en ingénierie logicielle et en administration de systèmes et réseaux.",
     en: "Discover my achievements in software engineering and systems & networks administration.",
   },
+
+  projectsDispo: {
+    fr: "Disponible sur demande",
+    en: ""
+  },
   softwareEngineering: {
     fr: "Génie Logiciel",
     en: "Software Engineering",
