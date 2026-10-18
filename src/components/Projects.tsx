@@ -3,6 +3,7 @@ import { useLanguage } from "@/lib/LanguageContext";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import {
   Carousel,
+  CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
@@ -179,18 +180,41 @@ const Projects = () => {
   const { t, language } = useLanguage();
   const [activeCategory, setActiveCategory] = useState<'GL' | 'ASR'>('GL');
   useScrollAnimation(); // For scroll animations
-  const carouselApiRef = useRef<any>(null);
+
+const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
+const [activeIndex, setActiveIndex] = useState(1);
+
+// Synchroniser l'index actif avec Embla
+useEffect(() => {
+  if (!carouselApi) return;
+
+  const updateActiveIndex = () => {
+    setActiveIndex(carouselApi.selectedScrollSnap());
+  };
+
+  // Sélectionner le deuxième élément au démarrage
+  carouselApi.scrollTo(1);
+  updateActiveIndex();
+
+  carouselApi.on("select", updateActiveIndex);
+  carouselApi.on("reInit", updateActiveIndex);
+
+  return () => {
+    carouselApi.off("select", updateActiveIndex);
+    carouselApi.off("reInit", updateActiveIndex);
+  };
+}, [carouselApi]);
   
   // Auto-scroll carousel
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (carouselApiRef.current) {
-        carouselApiRef.current.scrollNext();
-      }
-    }, 5000);
-    
-    return () => clearInterval(interval);
-  }, []);
+useEffect(() => {
+  if (!carouselApi || activeCategory !== "GL") return;
+
+  const interval = setInterval(() => {
+    carouselApi.scrollNext();
+  }, 5000);
+
+  return () => clearInterval(interval);
+}, [carouselApi, activeCategory]);
   
   // Animation variants for projects
   const containerVariants = {
@@ -263,115 +287,127 @@ const Projects = () => {
           whileInView="visible"
           viewport={{ once: false }}
         >
-          <Carousel
-            opts={{
-              align: "start",
-              loop: true,
-            }}
-            className="w-full"
-            setApi={(api) => {
-              carouselApiRef.current = api;
-            }}
-          >
+        <Carousel
+          opts={{
+            align: "center",
+            loop: true,
+            startIndex: 1,
+          }}
+          className="w-full"
+          setApi={setCarouselApi}
+        >
             <CarouselContent>
-              {projects.map((project, index) => (
-                <CarouselItem key={project.title} className="md:basis-1/2 lg:basis-1/3">
-                  <motion.div
-                    variants={itemVariants}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="glass-card overflow-hidden group h-full"
-                    whileHover={{ 
-                      y: -10,
-                      transition: { duration: 0.3 }
+              {projects.map((project, index) => {
+                const isActive = index === activeIndex;
+
+                return (
+                  <CarouselItem
+                    key={project.title}
+                    className="md:basis-1/2 lg:basis-1/3"
+                    style={{
+                      opacity: isActive ? 1 : 0.4,
                     }}
                   >
-                    <div className="relative aspect-video overflow-hidden">
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
-                        {/* <motion.a
-                          href={project.github}
-                          className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          whileHover={{ scale: 1.2, rotate: 5 }}
-                          whileTap={{ scale: 0.9 }}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.1 }}
-                        >
-                          <Github className="w-6 h-6" />
-                        </motion.a> */}
-                        <motion.a
-                          href={project.demo}
-                          className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          whileHover={{ scale: 1.2, rotate: -5 }}
-                          whileTap={{ scale: 0.9 }}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.2 }}
-                        >
-                          <ExternalLink className="w-6 h-6" />
-                        </motion.a>
-                      </div>
-                    </div>
-                    
-                    <div className="p-6">
-                      <motion.h3 
-                        className="text-xl font-bold mb-2"
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: false }}
-                        transition={{ duration: 0.3, delay: 0.1 }}
-                      >
-                        {project.title}
-                      </motion.h3>
-                      <motion.p 
-                        className="text-gray-300 mb-4"
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: false }}
-                        transition={{ duration: 0.3, delay: 0.2 }}
-                      >
-                          {project.description.fr.split('\n').map((line, index) => (
-                            <React.Fragment key={index}>
-                              {line}
-                              <br />
-                            </React.Fragment>
-                          ))}
-                      </motion.p>
-                      <motion.div 
-                        className="flex flex-wrap gap-2"
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: false }}
-                        transition={{ duration: 0.3, delay: 0.3 }}
-                      >
-                        {project.tech.map((tech, techIndex) => (
-                          <motion.span
-                            key={tech}
-                            className="px-3 py-1 text-sm rounded-full bg-highlight/10 text-highlight flex items-center gap-1"
-                            whileHover={{ scale: 1.1, backgroundColor: "rgba(var(--highlight), 0.2)" }}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.1 * techIndex }}
+                    <motion.div
+                      variants={itemVariants}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className="glass-card overflow-hidden group h-full"
+                      animate={{
+                        scale: isActive ? 1.0 : 0.75,
+                      }}
+                      whileHover={{ 
+                        y: -10,
+                        transition: { duration: 0.3 }
+                      }}
+                    >
+                      <div className="relative aspect-video overflow-hidden">
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                          {/* <motion.a
+                            href={project.github}
+                            className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{ scale: 1.2, rotate: 5 }}
+                            whileTap={{ scale: 0.9 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.1 }}
                           >
-                            {techIcons[tech] && (
-                              <span className="inline-flex">{techIcons[tech]}</span>
-                            )}
-                            <span>{tech}</span>
-                          </motion.span>
-                        ))}
-                      </motion.div>
-                    </div>
-                  </motion.div>
-                </CarouselItem>
-              ))}
+                            <Github className="w-6 h-6" />
+                          </motion.a> */}
+                          <motion.a
+                            href={project.demo}
+                            className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{ scale: 1.2, rotate: -5 }}
+                            whileTap={{ scale: 0.9 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2 }}
+                          >
+                            <ExternalLink className="w-6 h-6" />
+                          </motion.a>
+                        </div>
+                      </div>
+                      
+                      <div className="p-6">
+                        <motion.h3 
+                          className="text-xl font-bold mb-2"
+                          initial={{ opacity: 0, x: -10 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: false }}
+                          transition={{ duration: 0.3, delay: 0.1 }}
+                        >
+                          {project.title}
+                        </motion.h3>
+                        <motion.p 
+                          className="text-gray-300 mb-4"
+                          initial={{ opacity: 0 }}
+                          whileInView={{ opacity: 1 }}
+                          viewport={{ once: false }}
+                          transition={{ duration: 0.3, delay: 0.2 }}
+                        >
+                            {project.description.fr.split('\n').map((line, index) => (
+                              <React.Fragment key={index}>
+                                {line}
+                                <br />
+                              </React.Fragment>
+                            ))}
+                        </motion.p>
+                        <motion.div 
+                          className="flex flex-wrap gap-2"
+                          initial={{ opacity: 0, y: 10 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: false }}
+                          transition={{ duration: 0.3, delay: 0.3 }}
+                        >
+                          {project.tech.map((tech, techIndex) => (
+                            <motion.span
+                              key={tech}
+                              className="px-3 py-1 text-sm rounded-full bg-highlight/10 text-highlight flex items-center gap-1"
+                              whileHover={{ scale: 1.1, backgroundColor: "rgba(var(--highlight), 0.2)" }}
+                              initial={{ opacity: 0, scale: 0.8 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              transition={{ delay: 0.1 * techIndex }}
+                            >
+                              {techIcons[tech] && (
+                                <span className="inline-flex">{techIcons[tech]}</span>
+                              )}
+                              <span>{tech}</span>
+                            </motion.span>
+                          ))}
+                        </motion.div>
+                      </div>
+                    </motion.div>
+                  </CarouselItem>
+                )
+})}
             </CarouselContent>
               <CarouselPrevious className="left-1 sm:left-4 md:-left-2 bg-accent/20 text-white hover:bg-accent/40" />
               <CarouselNext className="right-1 sm:right-4 md:-right-2 bg-accent/20 text-white hover:bg-accent/40" />
