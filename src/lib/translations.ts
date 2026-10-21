@@ -56,11 +56,11 @@ export const translations: Translation = {
   },
   itStudent: {
     fr: "Développeur",
-    en: "General Computer Science Alternating Student",
+    en: "Fullstack",
   },
   asrAndGl: {
     fr: "fullstack",
-    en: "JavaScript",
+    en: "developer",
   },
   creativePassionate: {
     fr: "Créatif & Passionné",
@@ -88,8 +88,16 @@ export const translations: Translation = {
     en: "As a systems and network administrator, I focus on setting up secure, high-performance, and scalable infrastructures. My expertise covers virtualization, cybersecurity, and server management."
   },
   aboutMeDescriptionGL: {
-    fr: "En tant que développeur logiciel, j'aime concevoir des architectures applicatives propres et scalables. Je suis spécialisé dans les technologies Web modernes et les outils d'automatisation.",
-    en: "As a software developer, I love designing clean and scalable application architectures. I specialize in modern Web technologies and automation tools."
+    fr: "En tant que développeur logiciel, j'aime concevoir des architectures applicatives propres et scalables. Je suis spécialisé dans les technologies Web modernes.",
+    en: "As a software developer, I love designing clean and scalable application architectures. I specialize in modern Web technologies."
+  },
+  skillsHint: {
+    fr: "Cliquez sur une compétence pour voir son niveau",
+    en: "Click a skill to see its level"
+  },
+  timelineHint: {
+    fr: "Cliquez sur un événement pour en savoir plus",
+    en: "Click an event to read more"
   },
   skills: {
     fr: "Compétences",
@@ -148,8 +156,8 @@ export const translations: Translation = {
   },
   // Timeline
   myJourney: {
-    fr: "Mon Parcours",
-    en: "My Journey",
+    fr: "Mon parcours",
+    en: "My journey",
   },
   // Testimonials
   clientsOpinions: {

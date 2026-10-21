@@ -232,8 +232,8 @@ const Contact = () => {
                 <Phone className="text-highlight h-6 w-6" />
               </div>
               <span>+261 34 21 799 97</span>
-              <span>+261 32 40 799 03</span>
-              <span>(Whatsapp)</span>
+              {/* <span>+261 32 40 799 03</span>
+              <span>(Whatsapp)</span> */}
             </motion.div>
             
             <motion.div 
