@@ -67,8 +67,8 @@ export const translations: Translation = {
     en: "Creative & Passionate",
   },
   heroDescription: {
-    fr: "Passionné par l'informatique en générale, je combine expertise en administration système (ASR) et développement logiciel (GL) pour créer des solutions robustes et innovantes.",
-    en: "Passionate about general computer science, I combine expertise in systems administration (ASR) and software development (GL) to create robust and innovative solutions.",
+    fr: "Je code donc je suis. Du bout de mes doigts, mon avenir nait.",
+    en: "Je code donc je suis. Du bout de mes doigts, mon avenir nait.",
   },
   learnMore: {
     fr: "En savoir plus",

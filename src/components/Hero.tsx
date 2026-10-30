@@ -1,6 +1,6 @@
 
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowDown, Sparkles, Download } from "lucide-react";
+import { ArrowDown, Sparkles, Download, Phone } from "lucide-react";
 import { useLanguage } from "@/lib/LanguageContext";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
@@ -145,22 +145,7 @@ const Hero = () => {
   >
     {t("itStudent")}
   </motion.span>{" "}
-  {/* <motion.span
-    className="text-highlight block sm:text-5xl"
-    initial={{ opacity: 0, x: -20 }}
-    animate={{ opacity: 1, x: 0 }}
-    transition={{ delay: showGreeting ? 1.8 : 0.8, duration: 0.8 }}
-  >
-    ({t("asrAndGl")})
-  </motion.span>{" "} */}
 
-  {/* Ligne horizontale visible uniquement en mobile */}
-{/* <motion.hr
-  className="sm:hidden border-t-2 border-gray-600 my-2 w-[50%] mx-auto"
-  initial={{ width: 0 }}
-  animate={{ width: "50%" }}
-  transition={{ duration: 0.8, ease: "easeOut" }}
-/> */}
 
   {/* Animation du texte qui descend */}
   <motion.span
@@ -177,7 +162,7 @@ const Hero = () => {
 </motion.h1>
 
 
-          {/* <motion.p
+          <motion.p
             className="text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -187,7 +172,7 @@ const Hero = () => {
             }}
           >
             {t("heroDescription")}
-          </motion.p> */}
+          </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -208,14 +193,15 @@ const Hero = () => {
             </motion.a>
 
             <motion.a
-              href="/CV_Hermenio.pdf"
-              download="CV_Hermenio.pdf"
+              href="#contact"
+              // href="/CV_Hermenio.pdf"
+              // download="CV_Hermenio.pdf"
               className="inline-flex items-center gap-2 px-6 py-3 text-lg font-medium rounded-full bg-transparent border-2 border-highlight text-highlight hover:bg-highlight/10 transition-all duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Download className="w-5 h-5" />
-              {t("downloadCV")}
+              <Phone className="w-5 h-5" />
+              {t("contactMe")}
             </motion.a>
           </motion.div>
         </motion.div>
